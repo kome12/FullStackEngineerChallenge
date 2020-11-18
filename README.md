@@ -32,3 +32,13 @@ Opens on `http://localhost:4200`
 #### Admin User
 - Email: johndoe@gmail.com
 - Password: adminpassword
+
+#### Project Status
+- Log in
+- View / Add / Update / Delete employees
+- View / Add / Update performance reviews
+- Log out
+
+#### Tasks Not Complete
+- Difference between Admin view / Employee View
+- Submit feedback
