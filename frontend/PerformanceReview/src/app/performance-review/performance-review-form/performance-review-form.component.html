@@ -1,0 +1,34 @@
+<h3>
+    <!-- <ng-container *ngIf="selectedEmployee; else newEmployee">
+        <span>Currently viewing {{selectedEmployee.firstName}} {{selectedEmployee.lastName}}</span>
+    </ng-container>
+    <ng-template #newEmployee>
+        <span>New Employee</span>
+    </ng-template> -->
+</h3>
+
+<form [formGroup]="performanceReviewForm" (ngSubmit)="savePerformanceReview()" novalidate class="content-padding-8">
+    <mat-form-field appearance="fill">
+        <mat-label>Review For...</mat-label>
+        <mat-select formControlName="prForId" (selectionChange)="updateRequestedToId($event)">
+            <mat-option *ngFor="let employee of prForEmployeeList" [value]="employee._id">
+                {{employee.firstName}} {{employee.lastName}} ({{employee.email}})
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Request Review To</mat-label>
+        <mat-select formControlName="requestedToId" (selectionChange)="updatePRForEmployeeList($event)">
+            <mat-option *ngFor="let employee of requestedToEmployeeList" [value]="employee._id">
+                {{employee.firstName}} {{employee.lastName}} ({{employee.email}})
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+    <div class="">
+        <button mat-button type="button" name="close" (click)="closeForm()" class="content-padding-8">Close</button>
+        <button mat-button type="button" name="reset" (click)="resetForm()" class="content-padding-8">Reset</button>
+        <button mat-button type="submit" name="savePerformanceReview" [disabled]="performanceReviewForm.pristine || performanceReviewForm.status === 'INVALID'" class="content-padding-8">Save Performance Review</button>
+    </div>
+</form>

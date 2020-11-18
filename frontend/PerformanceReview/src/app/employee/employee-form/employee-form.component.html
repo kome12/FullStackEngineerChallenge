@@ -1,0 +1,40 @@
+<h3>
+    <ng-container *ngIf="selectedEmployee; else newEmployee">
+        <span>Currently viewing {{selectedEmployee.firstName}} {{selectedEmployee.lastName}}</span>
+    </ng-container>
+    <ng-template #newEmployee>
+        <span>New Employee</span>
+    </ng-template>
+</h3>
+
+<form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()" novalidate class="content-padding-8">
+    <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required placeholder="First Name">
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required placeholder="Last Name" />
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required placeholder="Email" />
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required placeholder="Password" />
+    </mat-form-field>
+    <br>
+    <div class="content-padding-8">
+        <mat-checkbox formControlName="isAdmin">Is Admin?</mat-checkbox>
+    </div>
+    <div class="">
+        <button mat-button *ngIf="selectedEmployee" type="button" name="delete" (click)="deleteEmployee()" class="content-padding-8">Delete Employee</button>
+        <button mat-button type="button" name="close" (click)="closeForm()" class="content-padding-8">Close</button>
+        <button mat-button type="button" name="reset" (click)="resetForm()" class="content-padding-8">Reset</button>
+        <button mat-button type="submit" name="saveEmployee" [disabled]="employeeForm.pristine || employeeForm.status === 'INVALID'" class="content-padding-8">Save Employee</button>
+    </div>
+</form>

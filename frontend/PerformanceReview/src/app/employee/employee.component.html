@@ -1,0 +1,42 @@
+<div *ngIf="displayEmployeeForm" class="content-padding-8">
+    <app-employee-form
+        [selectedEmployee]="selectedEmployee"
+        (closeFormEvent)="closeForm()"
+        (saveEmployeeEvent)="saveEmployee($event)"
+        (deleteEmployeeEvent)="deleteEmployee($event)"
+    >
+    </app-employee-form>
+</div>
+
+<h2>Employee List</h2>
+<div class="content-padding-8">
+    <table mat-table [dataSource]="employees">
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>First Name</th>
+            <td mat-cell *matCellDef="let employee"> {{employee.firstName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>Last Name</th>
+            <td mat-cell *matCellDef="let employee"> {{employee.lastName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let employee"> {{employee.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="isAdmin">
+            <th mat-header-cell *matHeaderCellDef>isAdmin</th>
+            <td mat-cell *matCellDef="let employee"> {{employee.isAdmin}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns;" (click)="selectedRow(row)"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
+
+<div *ngIf="!displayEmployeeForm" class="content-padding-8">
+    <button mat-button type="button" name="addNewEmployee" (click)="createNewEmployee()">Add New Employee</button>
+</div>
